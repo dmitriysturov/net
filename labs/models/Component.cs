@@ -108,9 +108,9 @@ namespace PcTechs.models{
 
     public class PowerSupply : Component    
     {
-        public int PowerOutput { get; set; } // Мощность в ваттах
-        public string? EfficiencyRating { get; set; } // Например, 80+ Gold
-        public string? FormFactor { get; set; } // Например, ATX
+        public int PowerOutput { get; set; }
+        public string? EfficiencyRating { get; set; }
+        public string? FormFactor { get; set; }
 
         public override string GetInfo()
         {
@@ -123,9 +123,9 @@ namespace PcTechs.models{
 
     public class StorageDevice : Component
     {
-        public int Capacity { get; set; } // Объем в ГБ
-        public string? Type { get; set; } // Например, SSD или HDD
-        public string? Interface { get; set; } // Например, SATA, NVMe
+        public int Capacity { get; set; }
+        public string? Type { get; set; }
+        public string? Interface { get; set; }
 
         public override string GetInfo()
         {
@@ -138,8 +138,8 @@ namespace PcTechs.models{
 
     public class CoolingSystem : Component
     {
-        public string? CoolingType { get; set; } // Например, Air или Liquid
-        public string? CompatibleSockets { get; set; } // Например, LGA1151, AM4
+        public string? CoolingType { get; set; }
+        public string? CompatibleSockets { get; set; }
         public int NumberOfFans { get; set; }
         public bool HasRGB { get; set; }
 
@@ -154,7 +154,7 @@ namespace PcTechs.models{
 
     public class ComputerCase : Component
     {
-        public string? FormFactor { get; set; } // Например, ATX, MicroATX
+        public string? FormFactor { get; set; }
         public string? Color { get; set; }
         public bool HasWindow { get; set; }
         public int NumberOfDriveBays { get; set; }
@@ -170,10 +170,10 @@ namespace PcTechs.models{
 
     public class OutMonitor : Component
     {
-        public int Size { get; set; } // Диагональ в дюймах
-        public string? Resolution { get; set; } // Например, 1920x1080
-        public int RefreshRate { get; set; } // Частота обновления в Гц
-        public string? PanelType { get; set; } // Например, IPS, TN, VA
+        public int Size { get; set; }
+        public string? Resolution { get; set; }
+        public int RefreshRate { get; set; }
+        public string? PanelType { get; set; }
 
         public override string GetInfo()
         {

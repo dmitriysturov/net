@@ -51,9 +51,9 @@ namespace PcTechs.services
             {
                 return ComponentsDictionary[componentType];
             }
-
             Console.WriteLine($"Компоненты типа {componentType} не найдены.");
             return null;
         }
+
     }
 }
