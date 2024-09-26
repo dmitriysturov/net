@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using PcTechs.models;
 using PcTechs.services;
+using PcTechs.Interfaces;
 
 namespace PcTechs.UI
 {
@@ -258,7 +260,8 @@ namespace PcTechs.UI
                 Console.WriteLine("1. Посмотреть все детали");
                 Console.WriteLine("2. Добавить новую деталь");
                 Console.WriteLine("3. Удалить деталь");
-                Console.WriteLine("4. Вернуться в главное меню");
+                Console.WriteLine("4. Сортировка компонентов");
+                Console.WriteLine("5. Вернуться в главное меню");
                 Console.Write("Выберите опцию: ");
 
                 string? choice = Console.ReadLine();
@@ -275,6 +278,9 @@ namespace PcTechs.UI
                         RemoveComponent();
                         break;
                     case "4":
+                        SortComponentsMenu();
+                        break;
+                    case "5":
                         back = true;
                         break;
                     default:
@@ -791,5 +797,96 @@ namespace PcTechs.UI
             }
             Console.ReadKey();
         }
+
+
+        public static void SortComponentsMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("Сортировка компонентов:");
+            Console.WriteLine("1. Сортировать по цене (по возрастанию)");
+            Console.WriteLine("2. Сортировать по цене (по убыванию)");
+            Console.WriteLine("3. Сортировать по типу (SSD/HDD)");
+
+            string? choice = Console.ReadLine();
+            switch (choice)
+            {
+                case "1":
+                    SortComponentsByPrice(ascending: true);
+                    break;
+                case "2":
+                    SortComponentsByPrice(ascending: false);
+                    break;
+                case "3":
+                    SortComponentsByType();
+                    break;
+                default:
+                    Console.WriteLine("Неправильный выбор. Попробуйте снова.");
+                    break;
+            }
+
+            Console.ReadKey();
+        }
+
+        public static void SortComponentsByPrice(bool ascending)
+        {
+            var components = ComponentsBank.GetAllComponents();
+
+            
+            components.SortComponents((x, y) =>
+            {
+                if (ascending)
+                {
+                    return x.Cost.CompareTo(y.Cost);
+                }
+                else
+                {
+                    return y.Cost.CompareTo(x.Cost);
+                }
+            });
+
+           
+            Console.WriteLine("Компоненты, отсортированные по цене:");
+            components.ForEachComponent(component =>
+            {
+                Console.WriteLine($"{component.Name} - {component.Cost} руб.");
+            });
+        }
+
+
+        public static void SortComponentsByType()
+        {
+            var components = ComponentsBank.GetAllComponents();
+
+            
+            components.SortComponents((x, y) =>
+            {
+                
+                if (x is IHDD && y is ISSD)
+                {
+                    return -1;
+                }
+                else if (x is ISSD && y is IHDD)
+                {
+                    return 1;
+                }
+                return 0;
+            });
+
+            
+            Console.WriteLine("Компоненты, отсортированные по типу (HDD/SSD):");
+            components.ForEachComponent(component =>
+            {
+                if (component is HDD hdd)
+                {
+                    Console.WriteLine($"{hdd.Name} - HDD, {hdd.Capacity}GB, {hdd.RPM} RPM");
+                }
+                else if (component is SSD ssd)
+                {
+                    Console.WriteLine($"{ssd.Name} - SSD, {ssd.Capacity}GB, NAND Type: {ssd.NANDType}, NVMe: {ssd.SupportsNVMe}");
+                }
+            });
+        }
+
+
     }
 }
