@@ -6,10 +6,10 @@ namespace PcTechs.services
 {
     public class ComponentsBank
     {
-        // Словарь, где ключом будет являться ComponentType
+        
         public static Dictionary<string, List<Component>> ComponentsDictionary { get; set; } = new Dictionary<string, List<Component>>();
 
-        // Метод для добавления компонента в банк с использованием ComponentType
+        
         public static void AddComponentToBank(Component component)
         {
             string? componentType = component.ComponentType;
@@ -29,7 +29,7 @@ namespace PcTechs.services
             Console.WriteLine($"{component.Name} добавлен(а) в банк компонентов как {componentType}.");
         }
 
-        // Метод для отображения всех компонентов в банке по их типам
+        
         public static void DisplayAvailableComponents()
         {
             Console.WriteLine("Доступные компоненты в банке:");
@@ -44,7 +44,7 @@ namespace PcTechs.services
             }
         }
 
-        // Метод для получения компонентов по типу (ComponentType)
+        
         public static List<Component>? GetComponentsByType(string componentType)
         {
             if (ComponentsDictionary.ContainsKey(componentType))
@@ -53,6 +53,29 @@ namespace PcTechs.services
             }
             Console.WriteLine($"Компоненты типа {componentType} не найдены.");
             return null;
+        }
+
+
+        public static void AddComponentToBank(string componentType, Component component)
+        {
+            if (!ComponentsDictionary.ContainsKey(componentType))
+            {
+                ComponentsDictionary[componentType] = new List<Component>();
+            }
+            ComponentsDictionary[componentType].Add(component);
+        }
+
+        public static ComponentCollection<Component> GetAllComponents()
+        {
+            var allComponents = new ComponentCollection<Component>();
+            foreach (var componentList in ComponentsDictionary.Values)
+            {
+                foreach (var component in componentList)
+                {
+                    allComponents.Add(component);
+                }
+            }
+            return allComponents;
         }
 
     }

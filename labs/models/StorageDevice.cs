@@ -3,7 +3,7 @@ using PcTechs.models;
 
 public class HDD : StorageDevice, IHDD
 {
-    public int RPM { get; set; } // Реализация уникальной характеристики для HDD
+    public int RPM { get; set; }
 
     public override string GetInfo()
     {
