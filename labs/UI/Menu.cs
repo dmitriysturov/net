@@ -7,7 +7,7 @@ namespace PcTechs.UI
 {
     public class Menu
     {
-        private static List<Computer> computerBuilds = new List<Computer>(); // Список сборок
+        private static List<Computer> computerBuilds = new List<Computer>();
 
         public static void DefaultMenu()
         {
@@ -44,7 +44,7 @@ namespace PcTechs.UI
             }
         }
 
-        // Управление сборками
+
         public static void ManageBuilds()
         {
             bool back = false;
@@ -68,13 +68,13 @@ namespace PcTechs.UI
                 switch (choice)
                 {
                     case "1":
-                        AddComponentsToBuild();  // Добавление деталей в сборку
+                        AddComponentsToBuild();
                         break;
                     case "2":
                         RemoveBuild();
                         break;
                     case "3":
-                        ViewBuild();  // Новый метод для просмотра сборки
+                        ViewBuild();
                         break;
                     case "4":
                         back = true;
@@ -86,7 +86,8 @@ namespace PcTechs.UI
             }
         }
 
-        // Создание новой сборки
+
+
         public static void CreateNewBuild()
         {
             Console.Write("Введите название новой сборки: ");
@@ -98,7 +99,7 @@ namespace PcTechs.UI
             Console.ReadKey();
         }
 
-        // Добавление компонентов в сборку
+
         public static void AddComponentsToBuild()
         {
             if (computerBuilds.Count == 0)
@@ -108,8 +109,8 @@ namespace PcTechs.UI
                 return;
             }
 
-            // Выбор сборки для добавления компонентов
-            Console.WriteLine("Выберите сборку для добавления деталей:");
+
+            Console.WriteLine("Выберите сборку для добавления компонентов:");
             for (int i = 0; i < computerBuilds.Count; i++)
             {
                 Console.WriteLine($"{i + 1}. {computerBuilds[i].Name}");
@@ -125,7 +126,7 @@ namespace PcTechs.UI
 
             var selectedBuild = computerBuilds[buildIndex - 1];
 
-            // Выбор типа компонента
+
             Console.Clear();
             Console.WriteLine("Выберите тип компонента для добавления:");
             Console.WriteLine("1. Материнская плата");
@@ -139,7 +140,7 @@ namespace PcTechs.UI
             Console.WriteLine("9. Монитор");
 
             string? componentTypeChoice = Console.ReadLine();
-            string componentType = componentTypeChoice switch
+            string? componentType = componentTypeChoice switch
             {
                 "1" => "Материнская плата",
                 "2" => "Процессор",
@@ -155,12 +156,12 @@ namespace PcTechs.UI
 
             if (componentType == null)
             {
-                Console.WriteLine("Неверный выбор компонента.");
+                Console.WriteLine("Неверный выбор типа компонента.");
                 Console.ReadKey();
                 return;
             }
 
-            // Получение доступных компонентов по типу
+
             var availableComponents = ComponentsBank.GetComponentsByType(componentType);
             if (availableComponents == null || availableComponents.Count == 0)
             {
@@ -169,13 +170,14 @@ namespace PcTechs.UI
                 return;
             }
 
-            // Выбор конкретного компонента для добавления
+
             Console.WriteLine($"\nДоступные {componentType}:");
             for (int i = 0; i < availableComponents.Count; i++)
             {
                 Console.WriteLine($"{i + 1}. {availableComponents[i].Name} - {availableComponents[i].Cost} руб.");
             }
 
+            Console.Write("Введите номер компонента для добавления: ");
             int componentIndex;
             if (!int.TryParse(Console.ReadLine(), out componentIndex) || componentIndex < 1 || componentIndex > availableComponents.Count)
             {
@@ -184,7 +186,7 @@ namespace PcTechs.UI
                 return;
             }
 
-            // Добавление компонента в сборку
+
             var selectedComponent = availableComponents[componentIndex - 1];
             selectedBuild.AddComponent(selectedComponent);
 
@@ -192,7 +194,8 @@ namespace PcTechs.UI
             Console.ReadKey();
         }
 
-        // Удаление сборки
+
+
         public static void RemoveBuild()
         {
             Console.Write("Введите номер сборки для удаления: ");
@@ -208,7 +211,7 @@ namespace PcTechs.UI
             Console.ReadKey();
         }
 
-        // Новый метод для просмотра сборки
+
         public static void ViewBuild()
         {
             if (computerBuilds.Count == 0)
@@ -218,7 +221,7 @@ namespace PcTechs.UI
                 return;
             }
 
-            // Выбор сборки для просмотра
+
             Console.WriteLine("Выберите сборку для просмотра:");
             for (int i = 0; i < computerBuilds.Count; i++)
             {
@@ -235,16 +238,16 @@ namespace PcTechs.UI
 
             var selectedBuild = computerBuilds[buildIndex - 1];
 
-            // Отображение конфигурации сборки
+            
             Console.Clear();
-            selectedBuild.DisplayConfiguration();  // Вызываем метод для отображения конфигурации компьютера
+            selectedBuild.ShowComponents();
 
             Console.ReadKey();
         }
 
 
 
-        // Редактирование компонентов
+        
         public static void ManageComponents()
         {
             bool back = false;
@@ -281,7 +284,7 @@ namespace PcTechs.UI
             }
         }
 
-        // Добавление новой детали
+
         public static void AddComponent()
         {
             Console.Clear();
@@ -757,7 +760,7 @@ namespace PcTechs.UI
         }
 
 
-        // Удаление детали
+
         public static void RemoveComponent()
         {
             Console.Write("Введите тип компонента (Материнская плата, Процессор и т.д.): ");
