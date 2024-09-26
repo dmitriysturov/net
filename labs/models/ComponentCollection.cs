@@ -1,3 +1,7 @@
+/// <summary>
+/// lab 2
+/// </summary>
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,6 +49,21 @@ namespace PcTechs.models
         IEnumerator IEnumerable.GetEnumerator()
         {
             return _components.GetEnumerator();
+        }
+
+        // lab 3 - Делегаты
+        public void SortComponents(Func<T, T, int> comparison)
+        {
+            _components.Sort(new Comparison<T>(comparison));
+        }
+
+        
+        public void ForEachComponent(Action<T> action)
+        {
+            foreach (var component in _components)
+            {
+                action(component);
+            }
         }
     }
 }
