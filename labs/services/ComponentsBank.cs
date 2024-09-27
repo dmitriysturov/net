@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using PcTechs.models;
 using PcTechs.logs;
 
+
 namespace PcTechs.services
 {
     public class ComponentsBank
@@ -21,14 +22,23 @@ namespace PcTechs.services
                 return;
             }
 
-            if (!ComponentsDictionary.ContainsKey(componentType))
+            // Проверка на наличие такого компонента
+            if (!ContainsComponent(component))
             {
-                ComponentsDictionary[componentType] = new List<Component>();
-            }
+                if (!ComponentsDictionary.ContainsKey(componentType))
+                {
+                    ComponentsDictionary[componentType] = new List<Component>();
+                }
 
-            ComponentsDictionary[componentType].Add(component);
-            Console.WriteLine($"{component.Name} добавлен(а) в банк компонентов как {componentType}.");
+                ComponentsDictionary[componentType].Add(component);
+                Console.WriteLine($"{component.Name} добавлен(а) в банк компонентов как {componentType}.");
+            }
+            else
+            {
+                Console.WriteLine($"Компонент {component.Name} уже существует в банке.");
+            }
         }
+
 
         
         public static void DisplayAvailableComponents(Logger<string> logger)
@@ -69,6 +79,19 @@ namespace PcTechs.services
             }
             return allComponents;
         }
+
+        public static bool ContainsComponent(Component component)
+        {
+            if (ComponentsDictionary.ContainsKey(component.ComponentType))
+            {
+                
+                return ComponentsDictionary[component.ComponentType]
+                    .Any(c => c.Name == component.Name);
+            }
+            return false;
+        }
+
+
 
     }
 }

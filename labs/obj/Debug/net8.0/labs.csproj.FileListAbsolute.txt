@@ -40,3 +40,4 @@ E:\Users\Dima\programming\Susu\net\labs\obj\Debug\net8.0\labs.sourcelink.json
 E:\Users\Dima\programming\Susu\net\labs\obj\Debug\net8.0\labs.csproj.Up2Date
 >>>>>>> 91ad8cbf739a81d0517a3ae99fbc0c360bbff7ca
 D:\Users\sturo_gpmk3vo\programming\susu\net\labs\bin\Debug\net8.0\Newtonsoft.Json.dll
+E:\Users\Dima\programming\Susu\net\labs\bin\Debug\net8.0\Newtonsoft.Json.dll

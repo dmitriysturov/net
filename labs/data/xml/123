@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfComponent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Component xsi:type="MotherBoard">
+    <ComponentType>Материнская плата</ComponentType>
+    <Name>ASUS ROG Strix B550-F</Name>
+    <Cost>150</Cost>
+    <ConnectionType>Внутренний</ConnectionType>
+    <Manufactor>ASUS</Manufactor>
+    <socket>AM4</socket>
+    <TypeOfSupportedMemory>DDR4</TypeOfSupportedMemory>
+    <FormFactor>ATX</FormFactor>
+    <ChipSet>B550</ChipSet>
+    <MemorySlots>4</MemorySlots>
+    <PCI>4</PCI>
+  </Component>
+</ArrayOfComponent>
