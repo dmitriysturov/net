@@ -57,15 +57,6 @@ namespace PcTechs.services
         }
 
 
-        public static void AddComponentToBank(string componentType, Component component)
-        {
-            if (!ComponentsDictionary.ContainsKey(componentType))
-            {
-                ComponentsDictionary[componentType] = new List<Component>();
-            }
-            ComponentsDictionary[componentType].Add(component);
-        }
-
         public static ComponentCollection<Component> GetAllComponents()
         {
             var allComponents = new ComponentCollection<Component>();
