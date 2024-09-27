@@ -23,48 +23,45 @@ namespace PcTechs
 
             try
             {
-                // Устанавливаем путь к config.json относительно корня проекта (labs/configuration)
                 string rootDirectory = AppDomain.CurrentDomain.BaseDirectory;
                 string projectDirectory = Path.Combine(rootDirectory, "..", "..", "..");
                 string configFilePath = Path.Combine(projectDirectory, "configuration", "config.json");
 
-                // Загружаем конфигурацию
                 var config = Configuration.LoadConfiguration(configFilePath);
 
                 logger = new Logger<string>();
 
                 ConsoleLogger consoleLogger = new ConsoleLogger();
 
-                // Путь для логов (labs/logs/logs)
-                string logFilePath = Path.Combine(projectDirectory, "logs", "logs", $"log_{formattedDate}.log");
+                string logDirectory = config.LogDirectory ?? "logs/logs";  // Если путь не указан, используем дефолтный
+                string logFilePath = Path.Combine(projectDirectory, logDirectory, $"log_{formattedDate}.log");
 
                 FileLogger fileLogger = new FileLogger(logFilePath);
 
-                // Подключаем логеры
                 logger.LogEvent += consoleLogger.PrintToConsole;
                 logger.LogEvent += fileLogger.PrintToFile;
 
-                // Логируем начало работы
                 logger.Log("Начало выполнения программы");
 
-                // Подключаем обработчики для завершения программы и необработанных исключений
                 AppDomain.CurrentDomain.UnhandledException += HandleUnhandledExceptions;
                 AppDomain.CurrentDomain.ProcessExit += HandleProcessExit;
 
-                // Добавляем тестовые компоненты
                 tests.ComponentTestData.AddTestComponents();
                 Menu.DefaultMenu(logger);
             }
             catch (ConfigurationException ex)
             {
+                logger.Log($"Ошибка конфигурации: {ex.Message}");
                 Console.WriteLine($"Ошибка конфигурации: {ex.Message}");
             }
             catch (FileNotFoundException ex)
             {
+                logger.Log($"Файл не найден: {ex.Message}");
                 Console.WriteLine($"Файл не найден: {ex.Message}");
             }
             catch (Exception ex)
             {
+                logger.Log($"Общая ошибка: {ex.Message}");
                 Console.WriteLine($"Общая ошибка: {ex.Message}");
             }
         }

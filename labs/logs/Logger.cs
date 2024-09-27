@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace PcTechs.logs
 {
@@ -7,6 +8,18 @@ namespace PcTechs.logs
     {
         public event Action<string>? LogEvent;
 
+        // Асинхронное логирование
+        public async Task LogAsync(T message)
+        {
+            string logMessage = $"{DateTime.Now}: {message.ToString()}";
+
+            if (LogEvent != null)
+            {
+                await Task.Run(() => LogEvent(logMessage));
+            }
+        }
+
+        // Синхронное логирование
         public void Log(T message)
         {
             string logMessage = $"{DateTime.Now}: {message.ToString()}";
@@ -14,35 +27,4 @@ namespace PcTechs.logs
             LogEvent?.Invoke(logMessage);
         }
     }
-
-
-    public class FileLogger
-    {
-        private string _filePath;
-
-        public FileLogger(string filePath)
-        {
-            // Проверяем и создаём директорию, если она не существует
-            string directoryPath = Path.GetDirectoryName(filePath);
-            if (!Directory.Exists(directoryPath))
-            {
-                Directory.CreateDirectory(directoryPath);  // Создаём директорию, если она не существует
-            }
-
-            _filePath = filePath;
-        }
-
-        // Метод для записи лога в файл
-        public void PrintToFile(string message)
-        {
-            using (StreamWriter writer = new StreamWriter(_filePath, true))
-            {
-                writer.WriteLine(message);
-            }
-        }
-    }
-
-    
-
-    
 }
