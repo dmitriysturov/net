@@ -4,7 +4,7 @@ using PcTechs.models;
 
 public class LiquidCooling : CoolingSystem, ILiquidCooling
 {
-    public int RadiatorSize { get; set; } // Реализация уникальной характеристики для жидкостного охлаждения
+    public int RadiatorSize { get; set; }
 
     public override string GetInfo()
     {
@@ -17,7 +17,7 @@ public class LiquidCooling : CoolingSystem, ILiquidCooling
 
 public class AirCooling : CoolingSystem, IAirCooling
 {
-    public int FanSize { get; set; } // Реализация уникальной характеристики для воздушного охлаждения
+    public int FanSize { get; set; }
 
     public override string GetInfo()
     {

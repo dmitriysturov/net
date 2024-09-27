@@ -1,4 +1,5 @@
 using System;
+using PcTechs.logs;
 
 namespace PcTechs.models
 {
@@ -15,9 +16,10 @@ namespace PcTechs.models
         }
 
         // Метод для добавления компонента в сборку
-        public void AddComponent(Component component)
+        public void AddComponent(Component component, Logger<string> logger)
         {
             _components.Add(component);
+            logger.Log($"{component.Name} добавлен в сборку {Name}");
             Console.WriteLine($"{component.Name} добавлен в сборку {Name}");
         }
 

@@ -7,10 +7,10 @@ namespace PcTechs.tests
 {
     public static class ComponentTestData
     {
-        // Метод для добавления 20 деталей в банк компонентов
+        
         public static void AddTestComponents()
         {
-            // Материнская плата
+            
             ComponentsBank.AddComponentToBank(new MotherBoard
             {
                 ComponentType = "Материнская плата",
@@ -26,7 +26,7 @@ namespace PcTechs.tests
                 PCI = 4.0f
             });
 
-            // Видеокарта
+            
             ComponentsBank.AddComponentToBank(new GPU
             {
                 ComponentType = "Видеокарта",
@@ -42,7 +42,7 @@ namespace PcTechs.tests
                 MonitorsCount = 4
             });
 
-            // Процессор
+         
             ComponentsBank.AddComponentToBank(new CPU
             {
                 ComponentType = "Процессор",
@@ -58,7 +58,7 @@ namespace PcTechs.tests
                 TDP = 105
             });
 
-            // Оперативная память
+           
             ComponentsBank.AddComponentToBank(new RAM
             {
                 ComponentType = "Оперативная память",
@@ -73,7 +73,7 @@ namespace PcTechs.tests
                 Rang = 2
             });
 
-            // Блок питания
+            
             ComponentsBank.AddComponentToBank(new PowerSupply
             {
                 ComponentType = "Блок питания",
@@ -86,7 +86,7 @@ namespace PcTechs.tests
                 FormFactor = "ATX"
             });
 
-            // SSD накопитель
+            
             ComponentsBank.AddComponentToBank(new SSD
             {
                 ComponentType = "Накопитель",
@@ -100,7 +100,7 @@ namespace PcTechs.tests
                 Interface = "NVMe"
             });
 
-            // HDD накопитель
+           
             ComponentsBank.AddComponentToBank(new HDD
             {
                 ComponentType = "Накопитель",
@@ -113,7 +113,7 @@ namespace PcTechs.tests
                 Interface = "SATA"
             });
 
-            // Жидкостное охлаждение
+            
             ComponentsBank.AddComponentToBank(new LiquidCooling
             {
                 ComponentType = "Система охлаждения",
@@ -127,7 +127,7 @@ namespace PcTechs.tests
                 CompatibleSockets = "AM4, LGA1200"
             });
 
-            // Воздушное охлаждение
+            
             ComponentsBank.AddComponentToBank(new AirCooling
             {
                 ComponentType = "Система охлаждения",
@@ -141,7 +141,7 @@ namespace PcTechs.tests
                 CompatibleSockets = "AM4, LGA1200"
             });
 
-            // Корпус
+            
             ComponentsBank.AddComponentToBank(new ComputerCase
             {
                 ComponentType = "Корпус",
@@ -155,7 +155,7 @@ namespace PcTechs.tests
                 NumberOfDriveBays = 2
             });
 
-            // Монитор
+            
             ComponentsBank.AddComponentToBank(new OutMonitor
             {
                 ComponentType = "Монитор",
@@ -169,7 +169,7 @@ namespace PcTechs.tests
                 PanelType = "IPS"
             });
 
-            // Добавляем ещё 9 других компонентов, чтобы было 20
+            
             ComponentsBank.AddComponentToBank(new MotherBoard
             {
                 ComponentType = "Материнская плата",
@@ -215,7 +215,7 @@ namespace PcTechs.tests
                 TDP = 125
             });
 
-            // Монитор
+            
             ComponentsBank.AddComponentToBank(new OutMonitor
             {
                 ComponentType = "Монитор",
@@ -229,7 +229,7 @@ namespace PcTechs.tests
                 PanelType = "IPS"
             });
 
-            // Оперативная память
+          
             ComponentsBank.AddComponentToBank(new RAM
             {
                 ComponentType = "Оперативная память",
@@ -244,7 +244,7 @@ namespace PcTechs.tests
                 Rang = 2
             });
 
-            // Блок питания
+           
             ComponentsBank.AddComponentToBank(new PowerSupply
             {
                 ComponentType = "Блок питания",
@@ -257,7 +257,7 @@ namespace PcTechs.tests
                 FormFactor = "ATX"
             });
 
-            // Материнская плата
+           
             ComponentsBank.AddComponentToBank(new MotherBoard
             {
                 ComponentType = "Материнская плата",
@@ -273,7 +273,7 @@ namespace PcTechs.tests
                 PCI = 4.0f
             });
 
-            // Накопитель SSD
+           
             ComponentsBank.AddComponentToBank(new SSD
             {
                 ComponentType = "Накопитель",
@@ -287,7 +287,7 @@ namespace PcTechs.tests
                 Interface = "SATA"
             });
 
-            // Воздушное охлаждение
+            
             ComponentsBank.AddComponentToBank(new AirCooling
             {
                 ComponentType = "Система охлаждения",
@@ -301,7 +301,7 @@ namespace PcTechs.tests
                 CompatibleSockets = "AM4, LGA1151"
             });
 
-            // Процессор
+            
             ComponentsBank.AddComponentToBank(new CPU
             {
                 ComponentType = "Процессор",
@@ -317,7 +317,7 @@ namespace PcTechs.tests
                 TDP = 125
             });
 
-            // Видеокарта
+            
             ComponentsBank.AddComponentToBank(new GPU
             {
                 ComponentType = "Видеокарта",
@@ -333,7 +333,7 @@ namespace PcTechs.tests
                 MonitorsCount = 4
             });
 
-            // Накопитель HDD
+           
             ComponentsBank.AddComponentToBank(new HDD
             {
                 ComponentType = "Накопитель",
@@ -346,7 +346,7 @@ namespace PcTechs.tests
                 Interface = "SATA"
             });
 
-            // Корпус
+           
             ComponentsBank.AddComponentToBank(new ComputerCase
             {
                 ComponentType = "Корпус",

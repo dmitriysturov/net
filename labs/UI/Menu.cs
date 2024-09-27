@@ -4,6 +4,7 @@ using System.Data;
 using PcTechs.models;
 using PcTechs.services;
 using PcTechs.Interfaces;
+using PcTechs.logs;
 
 namespace PcTechs.UI
 {
@@ -11,7 +12,7 @@ namespace PcTechs.UI
     {
         private static List<Computer> computerBuilds = new List<Computer>();
 
-        public static void DefaultMenu()
+        public static void DefaultMenu(Logger<string> logger)
         {
             bool exit = false;
             while (!exit)
@@ -25,21 +26,26 @@ namespace PcTechs.UI
                 Console.Write("Выберите опцию: ");
 
                 string? choice = Console.ReadLine();
+
+                logger.Log($"Выбран пункт меню: {choice}");
+
                 switch (choice)
                 {
                     case "1":
-                        ManageBuilds();
+                        ManageBuilds(logger);
                         break;
                     case "2":
-                        ManageComponents();
+                        ManageComponents(logger);
                         break;
                     case "3":
-                        CreateNewBuild();  
+                        CreateNewBuild(logger);  
                         break;
                     case "4":
+                        logger.Log("Пользователь вышел из программы.");
                         exit = true;
                         break;
                     default:
+                        logger.Log("Неверный выбор.");
                         Console.WriteLine("Неправильный выбор. Попробуйте снова.");
                         break;
                 }
@@ -47,12 +53,13 @@ namespace PcTechs.UI
         }
 
 
-        public static void ManageBuilds()
+        public static void ManageBuilds(Logger<string> logger)
         {
             bool back = false;
             while (!back)
             {
                 Console.Clear();
+                logger.Log("Пользователь вошёл в управление сборками.");
                 Console.WriteLine("Управление сборками:");
                 for (int i = 0; i < computerBuilds.Count; i++)
                 {
@@ -70,13 +77,13 @@ namespace PcTechs.UI
                 switch (choice)
                 {
                     case "1":
-                        AddComponentsToBuild();
+                        AddComponentsToBuild(logger);
                         break;
                     case "2":
-                        RemoveBuild();
+                        RemoveBuild(logger);
                         break;
                     case "3":
-                        ViewBuild();
+                        ViewBuild(logger);
                         break;
                     case "4":
                         back = true;
@@ -90,22 +97,25 @@ namespace PcTechs.UI
 
 
 
-        public static void CreateNewBuild()
+        public static void CreateNewBuild(Logger<string> logger)
         {
+            logger.Log("Пользователь создал новую сборку");
             Console.Write("Введите название новой сборки: ");
             string? buildName = Console.ReadLine();
 
             var newBuild = new Computer(buildName);
             computerBuilds.Add(newBuild);
+            logger.Log($"Сборка {buildName} создана.");
             Console.WriteLine($"Сборка {buildName} создана.");
             Console.ReadKey();
         }
 
 
-        public static void AddComponentsToBuild()
+        public static void AddComponentsToBuild(Logger<string> logger)
         {
             if (computerBuilds.Count == 0)
             {
+                logger.Log("Нет доступных сборок. Сначала создайте сборку.");
                 Console.WriteLine("Нет доступных сборок. Сначала создайте сборку.");
                 Console.ReadKey();
                 return;
@@ -115,12 +125,14 @@ namespace PcTechs.UI
             Console.WriteLine("Выберите сборку для добавления компонентов:");
             for (int i = 0; i < computerBuilds.Count; i++)
             {
+                logger.Log($"{i + 1}. {computerBuilds[i].Name}");
                 Console.WriteLine($"{i + 1}. {computerBuilds[i].Name}");
             }
 
             int buildIndex;
             if (!int.TryParse(Console.ReadLine(), out buildIndex) || buildIndex < 1 || buildIndex > computerBuilds.Count)
             {
+                logger.Log("Неверный выбор сборки.");
                 Console.WriteLine("Неверный выбор сборки.");
                 Console.ReadKey();
                 return;
@@ -158,6 +170,7 @@ namespace PcTechs.UI
 
             if (componentType == null)
             {
+                logger.Log("Неверный выбор типа компонента.");
                 Console.WriteLine("Неверный выбор типа компонента.");
                 Console.ReadKey();
                 return;
@@ -167,6 +180,7 @@ namespace PcTechs.UI
             var availableComponents = ComponentsBank.GetComponentsByType(componentType);
             if (availableComponents == null || availableComponents.Count == 0)
             {
+                logger.Log($"Нет доступных компонентов типа {componentType}.");
                 Console.WriteLine($"Нет доступных компонентов типа {componentType}.");
                 Console.ReadKey();
                 return;
@@ -183,6 +197,7 @@ namespace PcTechs.UI
             int componentIndex;
             if (!int.TryParse(Console.ReadLine(), out componentIndex) || componentIndex < 1 || componentIndex > availableComponents.Count)
             {
+                logger.Log("Неверный выбор компонента.");
                 Console.WriteLine("Неверный выбор компонента.");
                 Console.ReadKey();
                 return;
@@ -190,34 +205,38 @@ namespace PcTechs.UI
 
 
             var selectedComponent = availableComponents[componentIndex - 1];
-            selectedBuild.AddComponent(selectedComponent);
+            selectedBuild.AddComponent(selectedComponent, logger);
 
+            logger.Log($"{selectedComponent.Name} добавлен в сборку {selectedBuild.Name}.");
             Console.WriteLine($"{selectedComponent.Name} добавлен в сборку {selectedBuild.Name}.");
             Console.ReadKey();
         }
 
 
 
-        public static void RemoveBuild()
+        public static void RemoveBuild(Logger<string> logger)
         {
             Console.Write("Введите номер сборки для удаления: ");
             if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= computerBuilds.Count)
             {
+                logger.Log($"Сборка {computerBuilds[index - 1].Name} удалена.");
                 Console.WriteLine($"Сборка {computerBuilds[index - 1].Name} удалена.");
                 computerBuilds.RemoveAt(index - 1);
             }
             else
             {
+                logger.Log("Неверный номер.");
                 Console.WriteLine("Неверный номер.");
             }
             Console.ReadKey();
         }
 
 
-        public static void ViewBuild()
+        public static void ViewBuild(Logger<string> logger)
         {
             if (computerBuilds.Count == 0)
             {
+                logger.Log("Нет доступных сборок.");
                 Console.WriteLine("Нет доступных сборок.");
                 Console.ReadKey();
                 return;
@@ -233,6 +252,7 @@ namespace PcTechs.UI
             int buildIndex;
             if (!int.TryParse(Console.ReadLine(), out buildIndex) || buildIndex < 1 || buildIndex > computerBuilds.Count)
             {
+                logger.Log("Неверный выбор сборки.");
                 Console.WriteLine("Неверный выбор сборки.");
                 Console.ReadKey();
                 return;
@@ -250,7 +270,7 @@ namespace PcTechs.UI
 
 
         
-        public static void ManageComponents()
+        public static void ManageComponents(Logger<string> logger)
         {
             bool back = false;
             while (!back)
@@ -265,25 +285,29 @@ namespace PcTechs.UI
                 Console.Write("Выберите опцию: ");
 
                 string? choice = Console.ReadLine();
+                
+
                 switch (choice)
                 {
                     case "1":
-                        ComponentsBank.DisplayAvailableComponents();
+                        ComponentsBank.DisplayAvailableComponents(logger);
                         Console.ReadKey();
                         break;
                     case "2":
-                        AddComponent();
+                        AddComponent(logger);
                         break;
                     case "3":
-                        RemoveComponent();
+                        RemoveComponent(logger);
                         break;
                     case "4":
-                        SortComponentsMenu();
+                        SortComponentsMenu(logger);
                         break;
                     case "5":
+                        logger.Log("Пользователь вернулся в главное меню.");
                         back = true;
                         break;
                     default:
+                        logger.Log("Неправильный выбор.");
                         Console.WriteLine("Неправильный выбор. Попробуйте снова.");
                         break;
                 }
@@ -291,7 +315,7 @@ namespace PcTechs.UI
         }
 
 
-        public static void AddComponent()
+        public static void AddComponent(Logger<string> logger)
         {
             Console.Clear();
             Console.WriteLine("Выберите компонент, который хотите добавить: ");
@@ -359,6 +383,7 @@ namespace PcTechs.UI
                     break;
 
                 default:
+                    logger.Log("Неверный выбор.");
                     Console.WriteLine("Неверный выбор. Попробуйте снова.");
                     break;
             }
@@ -366,6 +391,7 @@ namespace PcTechs.UI
             if (newComponent != null && componentType != null)
             {
                 ComponentsBank.AddComponentToBank(newComponent);
+                logger.Log($"{newComponent.Name} добавлен(а) в категорию {componentType}.");
                 Console.WriteLine($"{newComponent.Name} добавлен(а) в категорию {componentType}.");
             }
 
@@ -760,6 +786,7 @@ namespace PcTechs.UI
             }
             else
             {
+                
                 Console.WriteLine("Неверный тип охлаждения. Введите либо 'воздушное', либо 'жидкостное'.");
                 return null!;
             }
@@ -767,7 +794,7 @@ namespace PcTechs.UI
 
 
 
-        public static void RemoveComponent()
+        public static void RemoveComponent(Logger<string> logger)
         {
             Console.Write("Введите тип компонента (Материнская плата, Процессор и т.д.): ");
             string? componentType = Console.ReadLine();
@@ -775,6 +802,7 @@ namespace PcTechs.UI
             var components = ComponentsBank.GetComponentsByType(componentType!);
             if (components == null || components.Count == 0)
             {
+                logger.Log("Нет деталей для удаления");
                 Console.WriteLine("Нет деталей для удаления.");
                 Console.ReadKey();
                 return;
@@ -788,20 +816,23 @@ namespace PcTechs.UI
             Console.Write("Введите номер детали для удаления: ");
             if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= components.Count)
             {
+                logger.Log($"Деталь {components[index - 1].Name} удалена.");
                 Console.WriteLine($"Деталь {components[index - 1].Name} удалена.");
                 components.RemoveAt(index - 1);
             }
             else
             {
+                logger.Log("Неверный номер.");
                 Console.WriteLine("Неверный номер.");
             }
             Console.ReadKey();
         }
 
 
-        public static void SortComponentsMenu()
+        public static void SortComponentsMenu(Logger<string> logger)
         {
             Console.Clear();
+            logger.Log("Пользователь зашёл в меню сортировки компонентов.");
             Console.WriteLine("Сортировка компонентов:");
             Console.WriteLine("1. Сортировать по цене (по возрастанию)");
             Console.WriteLine("2. Сортировать по цене (по убыванию)");
@@ -811,15 +842,19 @@ namespace PcTechs.UI
             switch (choice)
             {
                 case "1":
+                    logger.Log("Компоненты отсортированы по цене (по возрастанию).");
                     SortComponentsByPrice(ascending: true);
                     break;
                 case "2":
+                    logger.Log("Компоненты отсортированы по цене (по убыванию).");
                     SortComponentsByPrice(ascending: false);
                     break;
                 case "3":
+                    logger.Log("Компоненты отсортированы по типу (SSD/HDD)");
                     SortComponentsByType();
                     break;
                 default:
+                    logger.Log("Неправильный выбор.");
                     Console.WriteLine("Неправильный выбор. Попробуйте снова.");
                     break;
             }
@@ -886,7 +921,5 @@ namespace PcTechs.UI
                 }
             });
         }
-
-
     }
 }
