@@ -830,7 +830,7 @@ namespace PcTechs.UI
         }
 
 
-        public static void SortComponentsMenu(Logger<string> logger)
+        public static async Task SortComponentsMenu(Logger<string> logger)
         {
             Console.Clear();
             logger.Log("Пользователь зашёл в меню сортировки компонентов.");
@@ -844,15 +844,15 @@ namespace PcTechs.UI
             {
                 case "1":
                     logger.Log("Компоненты отсортированы по цене (по возрастанию).");
-                    SortComponentsByPrice(ascending: true);
+                    await SortComponentsByPriceAsync(ascending: true, logger);
                     break;
                 case "2":
                     logger.Log("Компоненты отсортированы по цене (по убыванию).");
-                    SortComponentsByPrice(ascending: false);
+                    await SortComponentsByPriceAsync(ascending: false, logger);
                     break;
                 case "3":
                     logger.Log("Компоненты отсортированы по типу (SSD/HDD)");
-                    SortComponentsByType();
+                    await SortComponentsByTypeAsync(logger);
                     break;
                 default:
                     logger.Log("Неправильный выбор.");
@@ -862,13 +862,12 @@ namespace PcTechs.UI
 
             Console.ReadKey();
         }
-
-        public static void SortComponentsByPrice(bool ascending)
+        public static async Task SortComponentsByPriceAsync(bool ascending, Logger<string> logger)
         {
             var components = ComponentsBank.GetAllComponents();
 
-            
-            components.SortComponents((x, y) =>
+            // Асинхронная сортировка компонентов
+            await components.SortComponentsAsync((x, y) =>
             {
                 if (ascending)
                 {
@@ -878,9 +877,11 @@ namespace PcTechs.UI
                 {
                     return y.Cost.CompareTo(x.Cost);
                 }
-            });
+            },
+            count => logger.Log($"Обработано элементов: {count}"), // Логирование количества обработанных элементов
+            logger);
 
-           
+            // Вывод отсортированных компонентов
             Console.WriteLine("Компоненты, отсортированные по цене:");
             components.ForEachComponent(component =>
             {
@@ -889,14 +890,13 @@ namespace PcTechs.UI
         }
 
 
-        public static void SortComponentsByType()
+        public static async Task SortComponentsByTypeAsync(Logger<string> logger)
         {
             var components = ComponentsBank.GetAllComponents();
 
-            
-            components.SortComponents((x, y) =>
+            await components.SortComponentsAsync((x, y) =>
             {
-                
+                // Сортировка по типу (HDD/SSD)
                 if (x is IHDD && y is ISSD)
                 {
                     return -1;
@@ -906,9 +906,11 @@ namespace PcTechs.UI
                     return 1;
                 }
                 return 0;
-            });
+            },
+            count => logger.Log($"Обработано элементов: {count}"), // Логирование количества обработанных элементов
+            logger);
 
-            
+            // Вывод отсортированных компонентов
             Console.WriteLine("Компоненты, отсортированные по типу (HDD/SSD):");
             components.ForEachComponent(component =>
             {
