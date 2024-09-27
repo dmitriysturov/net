@@ -1,0 +1,4 @@
+{
+    "logLevel": "INFO",
+    "logDirectory": "logs/logs"
+}

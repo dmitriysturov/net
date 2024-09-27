@@ -86,6 +86,7 @@ namespace PcTechs.UI
                         ViewBuild(logger);
                         break;
                     case "4":
+                        logger.Log("Пользователь вернулся в основное меню.");
                         back = true;
                         break;
                     default:
