@@ -5,6 +5,8 @@ using PcTechs.models;
 using PcTechs.services;
 using PcTechs.Interfaces;
 using PcTechs.logs;
+using PcTechs.dataspace;
+using PcTechs.config;
 
 namespace PcTechs.UI
 {
@@ -14,6 +16,11 @@ namespace PcTechs.UI
 
         public static void DefaultMenu(Logger<string> logger)
         {
+            string rootDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string projectDirectory = Path.Combine(rootDirectory, "..", "..", "..");
+            var configFilePath = Path.Combine(projectDirectory, "configuration", "config.json");
+            var config = Configuration.LoadConfiguration(configFilePath);
+
             bool exit = false;
             while (!exit)
             {
@@ -21,8 +28,9 @@ namespace PcTechs.UI
                 Console.WriteLine("Главное меню:");
                 Console.WriteLine("1. Посмотреть сборки (добавить/удалить/посмотреть)");
                 Console.WriteLine("2. Редактор деталей (посмотреть/добавить/удалить детали)");
-                Console.WriteLine("3. Создать новую сборку");  
-                Console.WriteLine("4. Выход");
+                Console.WriteLine("3. Создать новую сборку");
+                Console.WriteLine("4. Сериализация/Десериализация компонентов");
+                Console.WriteLine("5. Выход");
                 Console.Write("Выберите опцию: ");
 
                 string? choice = Console.ReadLine();
@@ -38,9 +46,12 @@ namespace PcTechs.UI
                         ManageComponents(logger);
                         break;
                     case "3":
-                        CreateNewBuild(logger);  
+                        CreateNewBuild(logger);
                         break;
                     case "4":
+                        ManageSerialization(logger, config);
+                        break;
+                    case "5":
                         logger.Log("Пользователь вышел из программы.");
                         exit = true;
                         break;
@@ -584,7 +595,7 @@ namespace PcTechs.UI
                 ConnectionType = _connectionType,
                 Manufactor = _manufactor,
                 VolumeSize = _volumeSize,
-                Frequency = _frequency,
+                frequency = _frequency,
                 Radiator = _radiator,
                 CASLatency = _casLatency,
                 Rang = _rang,
@@ -924,5 +935,72 @@ namespace PcTechs.UI
                 }
             });
         }
+
+
+        public static void ManageSerialization(Logger<string> logger, Configuration config)
+        {
+            Console.Clear();
+            logger.Log("Пользователь зашел в меню сериализации/десериализации.");
+            Console.WriteLine("Выберите формат для сериализации:");
+            Console.WriteLine("1. JSON");
+            Console.WriteLine("2. XML");
+
+            string? choice = Console.ReadLine();
+            ISerializer<List<Component>> serializer = choice switch
+            {
+                "1" => new JSONSerializer<List<Component>>(),
+                "2" => new XMLSerializer<List<Component>>(),
+                _ => null!
+            };
+
+            if (serializer == null)
+            {
+                logger.Log("Неверный выбор.");
+                Console.WriteLine("Неверный выбор. Попробуйте снова.");
+                return;
+            }
+
+            // Корневая директория проекта
+            string rootDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string projectDirectory = Path.Combine(rootDirectory, "..", "..", "..");
+
+            // Директории для JSON и XML, указанные в конфигурации
+            string directoryPath = choice switch
+            {
+                "1" => Path.Combine(projectDirectory, config.JsonDirectory),
+                "2" => Path.Combine(projectDirectory, config.XmlDirectory),
+                _ => null!
+            };
+
+            var components = ComponentsBank.GetAllComponents();
+
+            Console.WriteLine("1. Сохранить в файл");
+            Console.WriteLine("2. Загрузить из файла");
+
+            string? operation = Console.ReadLine();
+            switch (operation)
+            {
+                case "1":
+                    Console.Write("Введите имя файла для сохранения: ");
+                    string? fileName = Console.ReadLine();
+                    string savePath = Path.Combine(directoryPath, fileName);
+                    components.SaveToFile(savePath, serializer);
+                    logger.Log($"Коллекция компонентов сохранена в файл: {savePath}");
+                    break;
+                case "2":
+                    Console.Write("Введите имя файла для загрузки: ");
+                    string? loadFileName = Console.ReadLine();
+                    string loadPath = Path.Combine(directoryPath, loadFileName);
+                    components.LoadFromFile(loadPath, serializer);
+                    logger.Log($"Коллекция компонентов загружена из файла: {loadPath}");
+                    break;
+                default:
+                    logger.Log("Неверный выбор.");
+                    Console.WriteLine("Неверный выбор. Попробуйте снова.");
+                    break;
+            }
+        }
+
+
     }
 }

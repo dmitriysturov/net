@@ -1,10 +1,12 @@
+using System.Xml.Serialization;
 using PcTechs.Interfaces;
 using PcTechs.models;
 
 
 public class LiquidCooling : CoolingSystem, ILiquidCooling
 {
-    public int RadiatorSize { get; set; }
+    [XmlElement]
+    public decimal RadiatorSize { get; set; }
 
     public override string GetInfo()
     {
@@ -17,7 +19,8 @@ public class LiquidCooling : CoolingSystem, ILiquidCooling
 
 public class AirCooling : CoolingSystem, IAirCooling
 {
-    public int FanSize { get; set; }
+    [XmlElement]
+    public decimal FanSize { get; set; }
 
     public override string GetInfo()
     {

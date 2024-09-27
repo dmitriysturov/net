@@ -1,4 +1,6 @@
 {
     "logLevel": "INFO",
-    "logDirectory": "logs/logs"
+    "logDirectory": "logs/logs",
+    "jsonDirectory": "data/json",
+    "xmlDirectory": "data/xml"
 }

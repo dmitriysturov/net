@@ -67,7 +67,7 @@ namespace PcTechs.tests
                 ConnectionType = "Внутренний",
                 Manufactor = "Corsair",
                 VolumeSize = 16,
-                Frequency = 3200,
+                frequency = 3200,
                 Radiator = true,
                 CASLatency = 16,
                 Rang = 2
@@ -238,7 +238,7 @@ namespace PcTechs.tests
                 ConnectionType = "Внутренний",
                 Manufactor = "G.SKILL",
                 VolumeSize = 32,
-                Frequency = 3600,
+                frequency = 3600,
                 Radiator = true,
                 CASLatency = 16,
                 Rang = 2

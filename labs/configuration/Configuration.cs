@@ -8,6 +8,8 @@ namespace PcTechs.config
     {
         public required string LogLevel { get; set; }
         public required string LogDirectory { get; set; }
+        public required string JsonDirectory { get; set; }
+        public required string XmlDirectory { get; set; }
 
         public static Configuration LoadConfiguration(string filePath)
         {
@@ -23,13 +25,13 @@ namespace PcTechs.config
             }
             catch (FileNotFoundException ex)
             {
-                // Логирование и выброс стандартного исключения
+                
                 Console.WriteLine($"Ошибка чтения конфигурации: {ex.Message}");
                 throw;
             }
             catch (Exception ex)
             {
-                // Логирование других исключений
+                
                 Console.WriteLine($"Ошибка: {ex.Message}");
                 throw new ConfigurationException("Ошибка при загрузке конфигурации.", ex);
             }
