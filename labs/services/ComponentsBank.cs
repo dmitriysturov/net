@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using PcTechs.models;
+using PcTechs.logs;
 
 namespace PcTechs.services
 {
@@ -30,7 +31,7 @@ namespace PcTechs.services
         }
 
         
-        public static void DisplayAvailableComponents()
+        public static void DisplayAvailableComponents(Logger<string> logger)
         {
             Console.WriteLine("Доступные компоненты в банке:");
 
