@@ -1,8 +1,8 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using PcTechs.logs;
+using PcTechs.dataspace;
+using PcTechs.Interfaces;
+
 
 namespace PcTechs.models
 {
@@ -82,5 +82,30 @@ namespace PcTechs.models
                 logger.Log($"Сортировка завершена. Обработано {count} элементов.");
             });
         }
+
+        public string Serialize(ISerializer<List<T>> serializer)
+        {
+            return serializer.Serialize(_components);
+        }
+
+        public void Deserialize(string data, ISerializer<List<T>> serializer)
+        {
+            List<T>? deserializedComponents = serializer.Deserialize(data);
+            if (deserializedComponents != null)
+            {
+                _components = deserializedComponents;
+            }
+        }
+
+        public void SaveToFile(string filePath, ISerializer<List<T>> serializer)
+        {
+            serializer.SerializeToFile(_components, filePath);
+        }
+
+        public void LoadFromFile(string filePath, ISerializer<List<T>> serializer)
+        {
+            _components = serializer.DeserializeFromFile(filePath);
+        }
+
     }
 }
