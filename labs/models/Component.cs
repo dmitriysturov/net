@@ -14,42 +14,43 @@ namespace PcTechs.models
     [XmlInclude(typeof(OutMonitor))]
     public abstract class Component
     {
-        [XmlElement]
+        [XmlElement("ComponentType")]
         public string? ComponentType { get; set; }
 
-        [XmlElement]
+        [XmlElement("Name")]
         public string? Name { get; set; }
 
-        [XmlElement]
+        [XmlElement("Cost")]
         public decimal Cost { get; set; }
 
-        [XmlElement]
+        [XmlElement("ConnectionType")]
         public string? ConnectionType { get; set; }
 
-        [XmlElement]
+        [XmlElement("Manufactor")]
         public string? Manufactor { get; set; }
 
         public abstract string GetInfo();
     }
 
+    [XmlRoot("MotherBoard")]
     public class MotherBoard : Component
 {
-    [XmlElement]
+    [XmlElement("socket")]
     public string? socket { get; set; }
 
-    [XmlElement]
+    [XmlElement("TypeOfSupportedMemory")]
     public string? TypeOfSupportedMemory { get; set; }
 
-    [XmlElement]
+    [XmlElement("FormFactor")]
     public string? FormFactor { get; set; }
 
-    [XmlElement]
+    [XmlElement("ChipSet")]
     public string? ChipSet { get; set; }
 
-    [XmlElement]
+    [XmlElement("MemorySlots")]
     public decimal MemorySlots { get; set; }
 
-    [XmlElement]
+    [XmlElement("PCI")]
     public float PCI { get; set; }
 
     public override string GetInfo()

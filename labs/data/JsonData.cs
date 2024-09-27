@@ -5,14 +5,24 @@ namespace PcTechs.dataspace
 {
     public class JSONSerializer<T> : ISerializer<T>
     {
+        private JsonSerializerSettings settings;
+
+        public JSONSerializer()
+        {
+            settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All
+            };
+        }
+
         public string Serialize(T data)
         {
-            return JsonConvert.SerializeObject(data);
+            return JsonConvert.SerializeObject(data, settings);
         }
 
         public T Deserialize(string data)
         {
-            return JsonConvert.DeserializeObject<T>(data);
+            return JsonConvert.DeserializeObject<T>(data, settings);
         }
 
         public void SerializeToFile(T data, string filePath)

@@ -960,17 +960,27 @@ namespace PcTechs.UI
                 return;
             }
 
-            // Корневая директория проекта
             string rootDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string projectDirectory = Path.Combine(rootDirectory, "..", "..", "..");
-
-            // Директории для JSON и XML, указанные в конфигурации
             string directoryPath = choice switch
             {
                 "1" => Path.Combine(projectDirectory, config.JsonDirectory),
                 "2" => Path.Combine(projectDirectory, config.XmlDirectory),
                 _ => null!
             };
+
+            if (directoryPath == null)
+            {
+                logger.Log("Ошибка: Директория не найдена.");
+                return;
+            }
+
+            // Создаем директорию, если она не существует
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+                logger.Log($"Создана директория: {directoryPath}");
+            }
 
             var components = ComponentsBank.GetAllComponents();
 
@@ -993,6 +1003,14 @@ namespace PcTechs.UI
                     string loadPath = Path.Combine(directoryPath, loadFileName);
                     components.LoadFromFile(loadPath, serializer);
                     logger.Log($"Коллекция компонентов загружена из файла: {loadPath}");
+
+                    // Добавляем десериализованные компоненты обратно в словарь
+                    foreach (var component in components)
+                    {
+                        ComponentsBank.AddComponentToBank(component);
+                    }
+
+                    logger.Log($"Компоненты добавлены в словарь.");
                     break;
                 default:
                     logger.Log("Неверный выбор.");
@@ -1000,6 +1018,8 @@ namespace PcTechs.UI
                     break;
             }
         }
+
+
 
 
     }
