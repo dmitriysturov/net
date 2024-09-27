@@ -1,8 +1,11 @@
+using System.Xml.Serialization;
 using PcTechs.Interfaces;
 using PcTechs.models;
 
+[XmlRoot("HDD")]
 public class HDD : StorageDevice, IHDD
 {
+    [XmlElement("RPM")]
     public int RPM { get; set; }
 
     public override string GetInfo()
@@ -13,9 +16,13 @@ public class HDD : StorageDevice, IHDD
     }
 }
 
+[XmlRoot("SSD")]
 public class SSD : StorageDevice, ISSD
 {
+    [XmlElement("NANDType")]
     public string? NANDType { get; set; }
+
+    [XmlElement("SupportsNVMe")]
     public bool SupportsNVMe { get; set; }
 
     public override string GetInfo()

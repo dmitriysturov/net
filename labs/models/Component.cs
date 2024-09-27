@@ -61,25 +61,25 @@ namespace PcTechs.models
     }
 }
 
-
+    [XmlRoot("GPU")]
     public class GPU : Component
     {
-        [XmlElement]
+        [XmlElement("GraphicalProcessor")]
         public string? GraphicalProcessor { get; set; }
 
-        [XmlElement]
+        [XmlElement("GMemory")]
         public decimal GMemory { get; set; }
 
-        [XmlElement]
+        [XmlElement("BusBitRate")]
         public decimal BusBitRate { get; set; }
 
-        [XmlElement]
+        [XmlElement("MemoryType")]
         public string? MemoryType { get; set; }
 
-        [XmlElement]
+        [XmlElement("ConnectionInterface")]
         public string? ConnectionInterface { get; set; }
 
-        [XmlElement]
+        [XmlElement("MonitorsCount")]
         public decimal MonitorsCount { get; set; }
 
         public override string GetInfo()
@@ -90,21 +90,22 @@ namespace PcTechs.models
         }
     }
 
+    [XmlRoot("RAM")]
     public class RAM : Component
     {
-        [XmlElement]
+        [XmlElement("VolumeSize")]
         public decimal VolumeSize { get; set; }
 
-        [XmlElement]
+        [XmlElement("frequency")]
         public decimal frequency { get; set; }
 
-        [XmlElement]
+        [XmlElement("Radiator")]
         public bool Radiator { get; set; }
 
-        [XmlElement]
+        [XmlElement("CASLatency")]
         public float CASLatency { get; set; }
 
-        [XmlElement]
+        [XmlElement("Rang")]
         public decimal Rang { get; set; }
 
         public override string GetInfo()
@@ -115,24 +116,25 @@ namespace PcTechs.models
         }
     }
 
+    [XmlRoot("CPU")]
     public class CPU : Component
     {
-        [XmlElement]
+        [XmlElement("socket")]
         public string? socket { get; set; }
 
-        [XmlElement]
+        [XmlElement("cores")]
         public decimal cores { get; set; }
 
-        [XmlElement]
+        [XmlElement("IntegratedGPU")]
         public bool IntegratedGPU { get; set; }
 
-        [XmlElement]
+        [XmlElement("MemoryType")]
         public string? MemoryType { get; set; }
 
-        [XmlElement]
+        [XmlElement("frequency")]
         public decimal frequency { get; set; }
 
-        [XmlElement]
+        [XmlElement("TDP")]
         public decimal TDP { get; set; }
 
         public override string GetInfo()
@@ -143,15 +145,16 @@ namespace PcTechs.models
         }
     }
 
+    [XmlRoot("PowerSupply")]
     public class PowerSupply : Component
     {
-        [XmlElement]
+        [XmlElement("PowerOutput")]
         public decimal PowerOutput { get; set; }
 
-        [XmlElement]
+        [XmlElement("EfficiencyRaiting")]
         public string? EfficiencyRating { get; set; }
 
-        [XmlElement]
+        [XmlElement("FormFactor")]
         public string? FormFactor { get; set; }
 
         public override string GetInfo()
@@ -162,15 +165,16 @@ namespace PcTechs.models
         }
     }
 
+    [XmlRoot("StorageDevice")]
     public class StorageDevice : Component
     {
-        [XmlElement]
+        [XmlElement("Capacity")]
         public decimal Capacity { get; set; }
 
-        [XmlElement]
+        [XmlElement("Type")]
         public string? Type { get; set; }
 
-        [XmlElement]
+        [XmlElement("Interface")]
         public string? Interface { get; set; }
 
         public override string GetInfo()
@@ -181,18 +185,19 @@ namespace PcTechs.models
         }
     }
 
+    [XmlRoot("CoolingSystem")]
     public class CoolingSystem : Component
     {
-        [XmlElement]
+        [XmlElement("CoolingType")]
         public string? CoolingType { get; set; }
 
-        [XmlElement]
+        [XmlElement("CompatibleSockets")]
         public string? CompatibleSockets { get; set; }
 
-        [XmlElement]
+        [XmlElement("NumberOfFans")]
         public decimal NumberOfFans { get; set; }
 
-        [XmlElement]
+        [XmlElement("HasRGB")]
         public bool HasRGB { get; set; }
 
         public override string GetInfo()
@@ -203,18 +208,19 @@ namespace PcTechs.models
         }
     }
 
+    [XmlRoot("ComputerCase")]
     public class ComputerCase : Component
     {
-        [XmlElement]
+        [XmlElement("FormFactor")]
         public string? FormFactor { get; set; }
 
-        [XmlElement]
+        [XmlElement("Color")]
         public string? Color { get; set; }
 
-        [XmlElement]
+        [XmlElement("HasWindow")]
         public bool HasWindow { get; set; }
 
-        [XmlElement]
+        [XmlElement("NumberOfDriveBays")]
         public decimal NumberOfDriveBays { get; set; }
 
         public override string GetInfo()
@@ -225,18 +231,19 @@ namespace PcTechs.models
         }
     }
 
+    [XmlRoot("OutMonitor")]
     public class OutMonitor : Component
     {
-        [XmlElement]
+        [XmlElement("Size")]
         public decimal Size { get; set; }
 
-        [XmlElement]
+        [XmlElement("Resolution")]
         public string? Resolution { get; set; }
 
-        [XmlElement]
+        [XmlElement("RefreshRate")]
         public decimal RefreshRate { get; set; }
 
-        [XmlElement]
+        [XmlElement("PanelType")]
         public string? PanelType { get; set; }
 
         public override string GetInfo()

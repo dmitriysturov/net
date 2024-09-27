@@ -1007,8 +1007,16 @@ namespace PcTechs.UI
                     // Добавляем десериализованные компоненты обратно в словарь
                     foreach (var component in components)
                     {
-                        ComponentsBank.AddComponentToBank(component);
+                        if (!ComponentsBank.ContainsComponent(component))
+                        {
+                            ComponentsBank.AddComponentToBank(component);
+                        }
+                        else
+                        {
+                            logger.Log($"{component.Name} уже существует в банке, пропущено.");
+                        }
                     }
+
 
                     logger.Log($"Компоненты добавлены в словарь.");
                     break;

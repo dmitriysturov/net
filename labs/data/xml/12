@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfComponent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Component xsi:type="MotherBoard">
+    <ComponentType>Материнская плата</ComponentType>
+    <Name>ASUS ROG Strix B550-F</Name>
+    <Cost>150</Cost>
+    <ConnectionType>Внутренний</ConnectionType>
+    <Manufactor>ASUS</Manufactor>
+    <socket>AM4</socket>
+    <TypeOfSupportedMemory>DDR4</TypeOfSupportedMemory>
+    <FormFactor>ATX</FormFactor>
+    <ChipSet>B550</ChipSet>
+    <MemorySlots>4</MemorySlots>
+    <PCI>4</PCI>
+  </Component>
+  <Component xsi:type="MotherBoard">
+    <ComponentType>Материнская плата</ComponentType>
+    <Name>MSI MPG Z490 Gaming Edge</Name>
+    <Cost>180.0</Cost>
+    <ConnectionType>Внутренний</ConnectionType>
+    <Manufactor>MSI</Manufactor>
+    <socket>LGA1200</socket>
+    <TypeOfSupportedMemory>DDR4</TypeOfSupportedMemory>
+    <FormFactor>ATX</FormFactor>
+    <ChipSet>Z490</ChipSet>
+    <MemorySlots>4.0</MemorySlots>
+    <PCI>4</PCI>
+  </Component>
+  <Component xsi:type="MotherBoard">
+    <ComponentType>Материнская плата</ComponentType>
+    <Name>Gigabyte X570 AORUS Elite</Name>
+    <Cost>180.0</Cost>
+    <ConnectionType>Внутренний</ConnectionType>
+    <Manufactor>Gigabyte</Manufactor>
+    <socket>AM4</socket>
+    <TypeOfSupportedMemory>DDR4</TypeOfSupportedMemory>
+    <FormFactor>ATX</FormFactor>
+    <ChipSet>X570</ChipSet>
+    <MemorySlots>4.0</MemorySlots>
+    <PCI>4</PCI>
+  </Component>
+  <Component xsi:type="GPU">
+    <ComponentType>Видеокарта</ComponentType>
+    <Name>NVIDIA RTX 3080</Name>
+    <Cost>800.0</Cost>
+    <ConnectionType>Внутренний</ConnectionType>
+    <Manufactor>NVIDIA</Manufactor>
+    <GraphicalProcessor>RTX 3080</GraphicalProcessor>
+    <GMemory>10240.0</GMemory>
+    <BusBitRate>320.0</BusBitRate>
+    <MemoryType>GDDR6X</MemoryType>
+    <ConnectionInterface>PCI-E</ConnectionInterface>
+    <MonitorsCount>4.0</MonitorsCount>
+  </Component>
+  <Component xsi:type="GPU">
+    <ComponentType>Видеокарта</ComponentType>
+    <Name>AMD Radeon RX 6800 XT</Name>
+    <Cost>700.0</Cost>
+    <ConnectionType>Внутренний</ConnectionType>
+    <Manufactor>AMD</Manufactor>
+    <GraphicalProcessor>RX 6800 XT</GraphicalProcessor>
+    <GMemory>16384.0</GMemory>
+    <BusBitRate>256.0</BusBitRate>
+    <MemoryType>GDDR6</MemoryType>
+    <ConnectionInterface>PCI-E</ConnectionInterface>
+    <MonitorsCount>4.0</MonitorsCount>
+  </Component>
+  <Component xsi:type="GPU">
+    <ComponentType>Видеокарта</ComponentType>
+    <Name>AMD Radeon RX 6900 XT</Name>
+    <Cost>1000.0</Cost>
+    <ConnectionType>Внутренний</ConnectionType>
+    <Manufactor>AMD</Manufactor>
+    <GraphicalProcessor>RX 6900 XT</GraphicalProcessor>
+    <GMemory>16384.0</GMemory>
+    <BusBitRate>256.0</BusBitRate>
+    <MemoryType>GDDR6</MemoryType>
+    <ConnectionInterface>PCI-E</ConnectionInterface>
+    <MonitorsCount>4.0</MonitorsCount>
+  </Component>
+  <Component xsi:type="RAM">
+    <ComponentType>Оперативная память</ComponentType>
+    <Name>Corsair Vengeance LPX 16GB</Name>
+    <Cost>90.0</Cost>
+    <ConnectionType>Внутренний</ConnectionType>
+    <Manufactor>Corsair</Manufactor>
+    <VolumeSize>16.0</VolumeSize>
+    <frequency>3200.0</frequency>
+    <Radiator>true</Radiator>
+    <CASLatency>16</CASLatency>
+    <Rang>2.0</Rang>
+  </Component>
+  <Component xsi:type="RAM">
+    <ComponentType>Оперативная память</ComponentType>
+    <Name>G.SKILL Trident Z RGB 32GB</Name>
+    <Cost>200.0</Cost>
+    <ConnectionType>Внутренний</ConnectionType>
+    <Manufactor>G.SKILL</Manufactor>
+    <VolumeSize>32.0</VolumeSize>
+    <frequency>3600.0</frequency>
+    <Radiator>true</Radiator>
+    <CASLatency>16</CASLatency>
+    <Rang>2.0</Rang>
+  </Component>
+  <Component xsi:type="PowerSupply">
+    <ComponentType>Блок питания</ComponentType>
+    <Name>Corsair RM850x</Name>
+    <Cost>130.0</Cost>
+    <ConnectionType>Внутренний</ConnectionType>
+    <Manufactor>Corsair</Manufactor>
+    <PowerOutput>850.0</PowerOutput>
+    <EfficiencyRaiting>80+ Gold</EfficiencyRaiting>
+    <FormFactor>ATX</FormFactor>
+  </Component>
+  <Component xsi:type="PowerSupply">
+    <ComponentType>Блок питания</ComponentType>
+    <Name>EVGA SuperNOVA 1000 G3</Name>
+    <Cost>160.0</Cost>
+    <ConnectionType>Внутренний</ConnectionType>
+    <Manufactor>EVGA</Manufactor>
+    <PowerOutput>1000.0</PowerOutput>
+    <EfficiencyRaiting>80+ Gold</EfficiencyRaiting>
+    <FormFactor>ATX</FormFactor>
+  </Component>
+</ArrayOfComponent>

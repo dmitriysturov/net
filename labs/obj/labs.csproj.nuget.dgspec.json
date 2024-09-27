@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Users\\sturo_gpmk3vo\\programming\\susu\\net\\labs\\labs.csproj": {}
+    "E:\\Users\\Dima\\programming\\Susu\\net\\labs\\labs.csproj": {}
   },
   "projects": {
-    "D:\\Users\\sturo_gpmk3vo\\programming\\susu\\net\\labs\\labs.csproj": {
+    "E:\\Users\\Dima\\programming\\Susu\\net\\labs\\labs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Users\\sturo_gpmk3vo\\programming\\susu\\net\\labs\\labs.csproj",
+        "projectUniqueName": "E:\\Users\\Dima\\programming\\Susu\\net\\labs\\labs.csproj",
         "projectName": "labs",
-        "projectPath": "D:\\Users\\sturo_gpmk3vo\\programming\\susu\\net\\labs\\labs.csproj",
-        "packagesPath": "C:\\Users\\sturo_gpmk3vo\\.nuget\\packages\\",
-        "outputPath": "D:\\Users\\sturo_gpmk3vo\\programming\\susu\\net\\labs\\obj\\",
+        "projectPath": "E:\\Users\\Dima\\programming\\Susu\\net\\labs\\labs.csproj",
+        "packagesPath": "C:\\Users\\Dima\\.nuget\\packages\\",
+        "outputPath": "E:\\Users\\Dima\\programming\\Susu\\net\\labs\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\sturo_gpmk3vo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Dima\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
